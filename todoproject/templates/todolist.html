@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do</title>
+    <link rel="stylesheet" href="{% static 'bootstrap.css' %}">
+    <script src="{% static 'bootstrap.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+</head>
+
+<body>
+    <div class="mt-5 p-1 mycolor">
+        <h1 class="text-center text-white p-5">To Do List Web App</h1>
+    </div>
+    <ul>
+        <form class="mainform text-center align-items-center" action="/addTodoItem/" method="post">{% csrf_token %}
+            <input class="text-dark" type="text" name="content">
+            <input class="btn btn-success" type="submit" value="Add Todo Item">
+        </form>
+        {% for i in all_items %}
+        <li class="">{{i.content}}
+            <form class="my-2" action="/deleteTodoItem/{{i.id}}/" method="post"> {% csrf_token %}
+                <input class="btn btn-danger" type="submit" value="Delete">
+            </form>
+
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>
